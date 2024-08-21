@@ -1,0 +1,10 @@
+# Build
+assets/dist/styles.css
+view/**/*_templ.go
+tmp/
+
+# Dependencies
+node_modules/
+
+# Misc
+.DS_Store

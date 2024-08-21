@@ -1,0 +1,10 @@
+package layouts
+
+import "app/views/components"
+
+templ AppLayout() {
+	@BaseLayout(BaseLayoutProps{}) {
+		@components.NavBar()
+		{ children... }
+	}
+}

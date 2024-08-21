@@ -1,0 +1,71 @@
+package pages
+
+import (
+	"app/views/components"
+	"app/views/layouts"
+)
+
+type RegisterIndexPageProps struct {
+	Token string
+}
+
+templ RegisterIndex(props RegisterIndexPageProps) {
+	@layouts.BaseLayout(layouts.BaseLayoutProps{}) {
+		<div class="p-4 w-full h-full bg-indigo-500 flex justify-center items-center">
+			<form hx-post="/auth/register" hx-target="#flash-message" class="w-full lg:w-1/4 p-8 bg-white rounded-lg">
+				@components.Input(components.InputProps{
+					ID:    "_csrf",
+					Name:  "_csrf",
+					Type:  "hidden",
+					Value: props.Token,
+				})
+				<h1 class="mb-8 text-xl font-bold text-center">Nice to meet you!</h1>
+				@components.Input(components.InputProps{
+          ID: "first_name",
+          Class: "mb-4",
+          Label: "First Name",
+          Name: "first_name",
+          Type: "text",
+        })
+				@components.Input(components.InputProps{
+          ID: "last_name",
+          Class: "mb-4",
+          Label: "Last Name",
+          Name: "last_name",
+          Type: "text",
+        })
+				@components.Input(components.InputProps{
+          ID: "email",
+          Class: "mb-4",
+          Label: "Email",
+          Name: "email",
+          Type: "email",
+        })
+				@components.Input(components.InputProps{
+          ID: "password",
+          Class: "mb-4",
+          Label: "Password",
+          Name: "password",
+          Type: "password",
+        })
+				@components.Input(components.InputProps{
+          ID: "confirm_password",
+          Class: "mb-4",
+          Label: "Confirm Password",
+          Name: "confirm_password",
+          Type: "password",
+        })
+				@components.Button(components.ButtonProps{
+          Class: "mb-4",
+          Color: "primary",
+          Text: "Register",
+        })
+				<div class="flex justify-center">
+					<a href="/login" class="text-indigo-500 hover:underline">
+            Already have an account? Login.
+          </a>
+				</div>
+			</form>
+		</div>
+	}
+}

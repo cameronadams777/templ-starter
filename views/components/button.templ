@@ -1,0 +1,41 @@
+package components
+
+import "fmt"
+
+func ButtonColor(color string) string {
+	var returned_color string
+	switch color {
+	case "success":
+		returned_color = "bg-green-500 hover:bg-green-700 text-white"
+	case "warning":
+		returned_color = "bg-yellow-500 hover:bg-yellow-700 text-white"
+	case "danger":
+		returned_color = "bg-red-500 hover:bg-red-700 text-white"
+	case "primary":
+		returned_color = "bg-indigo-500 hover:bg-indigo-700 text-white"
+	default:
+		if color != "" {
+			fmt.Println("Invalid color: " + color)
+		}
+		returned_color = "bg-indigo-500 hover:bg-indigo-700 text-white"
+	}
+	return returned_color
+}
+
+type ButtonProps struct {
+	Class string
+	Color string
+	Text  string
+	Type  string
+}
+
+const BASE_BUTTON_CLASS = "w-full px-4 py-2 rounded-md font-semibold transition-colors duration-300"
+
+templ Button(props ButtonProps) {
+	<button
+		type={ props.Type }
+		class={ BASE_BUTTON_CLASS + " " + ButtonColor(props.Color) + " " + props.Class }
+	>
+		{ props.Text }
+	</button>
+}

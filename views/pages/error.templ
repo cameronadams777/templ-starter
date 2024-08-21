@@ -1,0 +1,15 @@
+package pages
+
+import "app/views/layouts"
+
+templ ErrorIndex() {
+	@layouts.BaseLayout(layouts.BaseLayoutProps{}) {
+		<div class="w-full h-full bg-indigo-500 container">
+			<h1 class="text-4xl font-bold">500</h1>
+			<p class="text-2xl">
+        Looks like there is an issue on our end. We currently looking into it. Check back soon for an update!
+      </p>
+			<a href="/">Go back to home</a>
+		</div>
+	}
+}

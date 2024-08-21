@@ -1,0 +1,24 @@
+package components
+
+import "app/views"
+
+templ NavBar() {
+  <nav class="px-8 py-4 flex justify-between items-center border-b border-gray-300">
+    <h1 class="text-2xl font-bold">Templ-Starter</h1>
+    @nav_actions()
+  </nav>
+}
+
+templ nav_actions() {
+  {{ session := views.GetSessionContext(ctx) }}
+  if session.IsAuthenticated() {
+    <div>
+      <a href="/sign-out" class="mr-2 hover:underline font-bold">Logout</a>
+    </div>
+  } else {
+    <div>
+      <a href="/sign-in" class="mr-2 hover:underline font-bold">Login</a>
+      <a href="/register" class="hover:underline font-bold">Register</a>
+    </div>
+  }
+}

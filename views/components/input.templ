@@ -1,0 +1,25 @@
+package components
+
+type InputProps struct {
+	ID    string
+	Class string
+	Label string
+	Name  string
+	Type  string
+	Value string
+}
+
+const BASE_INPUT_CLASS = "w-full p-1 border border-gray-300 rounded-md"
+
+templ Input(props InputProps) {
+	<div class="flex flex-col">
+		<label for={ props.ID } class="mb-2 font-bold">{ props.Label }</label>
+		<input
+			class={ BASE_INPUT_CLASS + " " + props.Class }
+			id={ props.ID }
+			name={ props.Name }
+			type={ props.Type }
+      value={ props.Value }
+		/>
+	</div>
+}

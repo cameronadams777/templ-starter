@@ -1,0 +1,25 @@
+package layouts
+
+import "app/views/components"
+
+type BaseLayoutProps struct{}
+
+templ BaseLayout(props BaseLayoutProps) {
+	<!DOCTYPE html>
+	<html lang="en" class="w-full h-full p-0 m-0">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>Vids</title>
+			<link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+			<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+			<link rel="stylesheet" href="/assets/dist/styles.css"/>
+			<script src="/assets/js/htmx.min.js"></script>
+		</head>
+		<body class="relative w-full h-full p-0 m-0">
+			@components.FlashMessage(components.FlashMessageProps{})
+			{ children... }
+		</body>
+	</html>
+}
