@@ -1,6 +1,6 @@
 # Build
 assets/dist/styles.css
-view/**/*_templ.go
+views/**/*_templ.go
 tmp/
 
 # Dependencies
