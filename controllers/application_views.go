@@ -10,10 +10,16 @@ import (
 type ApplicationViewHandler struct {}
 
 func (av *ApplicationViewHandler) HandleHomeIndex(c echo.Context) error {
+  user_id := c.Get("user_id")
+
+  if user_id == nil {
+    user_id = ""
+  }
+
 	app_context := structs.AppContext{
 		Key: "session",
 		Value: structs.SessionContext{
-      UserID: c.Get("user_id").(string),
+      UserID: user_id.(string),
 		},
 	}
 	return render_with_context(c, pages.HomeIndex(), app_context)
