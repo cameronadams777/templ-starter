@@ -25,6 +25,10 @@ func (u User) MarshalJSON() ([]byte, error) {
 	return json.Marshal(x)
 }
 
+func (u User) FullName() string {
+  return u.FirstName + " " + u.LastName
+}
+
 func (u User) IsConfirmed() bool {
 	return u.ConfirmedAt != nil
 }

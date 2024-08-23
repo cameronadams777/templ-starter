@@ -22,7 +22,7 @@ type AuthService struct {
 
 func (s *AuthService) Login(email string, password string) error {
 	user_repo := repositories.UserRepository{DB: s.DB}
-	user, err := user_repo.GetUser(repositories.GetUserParams{Email: email})
+	user, err := user_repo.FindUser(repositories.FindUserParams{Email: email})
 
 	if err != nil {
 		return err

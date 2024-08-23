@@ -52,5 +52,11 @@ func main() {
 	app.Use(middleware_handlers.SetSessionInContext)
 	app.Use(middleware_handlers.NoSessionRedirect)
 
+  users := app.Group("/users")
+  users_controller := controllers.UsersController {
+    DB: db,
+  }
+  users.GET("/edit", users_controller.HandleUsersEdit)
+
 	app.Logger.Fatal(app.Start(":4000"))
 }

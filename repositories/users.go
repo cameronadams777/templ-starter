@@ -7,32 +7,42 @@ import (
 )
 
 type UserRepository struct {
-  DB *gorm.DB
+	DB *gorm.DB
 }
 
-type GetUserParams struct {
-  Email string
+type FindUserParams struct {
+	ID    string
+	Email string
 }
 
-func (s *UserRepository) GetUser(params GetUserParams) (*models.User, error) {
-  var user models.User
+func (s *UserRepository) FindUser(params FindUserParams) (*models.User, error) {
+	var user models.User
 
-  err := s.DB.Where("email = ?", params.Email).First(&user).Error
+  tx := s.DB
 
-  if err != nil {
-    return nil, err
+  if params.ID != "" {
+    tx = tx.Where("id = ?", params.ID)
   }
 
-  return &user, nil
+  if params.Email != "" {
+    tx = tx.Where("email = ?", params.Email)
+  }
+
+  err := tx.First(&user).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
 }
 
 func (s *UserRepository) CreateUser(user models.User) error {
-  err := s.DB.Create(&user).Error
+	err := s.DB.Create(&user).Error
 
-  if err != nil {
-    return err
-  }
+	if err != nil {
+		return err
+	}
 
-  return nil
+	return nil
 }
-

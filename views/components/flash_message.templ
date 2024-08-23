@@ -6,7 +6,7 @@ type FlashMessageProps struct {
 
 templ FlashMessage(props FlashMessageProps) {
 	if props.Message != "" {
-		<div id="flash-message" class="bg-red-500 text-white p-4">
+		<div id="flash-message" class="fixed top-0 left-0 w-full bg-red-500 text-white p-4 animate-slideInFromTop">
 			{ props.Message }
 		</div>
 	} else {

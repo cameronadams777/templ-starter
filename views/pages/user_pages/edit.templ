@@ -1,0 +1,58 @@
+package user_pages
+
+import (
+	"app/models"
+	"app/views/components"
+	"app/views/layouts"
+)
+
+type UserEditPageProps struct {
+	Token string
+	User  models.User
+}
+
+templ UserEdit(props UserEditPageProps) {
+	@layouts.AppLayout() {
+		<div class="w-full px-4 container mx-auto mt-8">
+			<h1 class="text-2xl font-bold mb-8">{ props.User.FullName() }</h1>
+			<form hx-patch="/users/update" hx-target="#flash-message">
+				<input type="hidden" name="" value={ props.Token }/>
+				<div class="space-y-12">
+					<div class="border-b border-gray-900/10 pb-12">
+						<h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
+						<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+							<div class="sm:col-span-3">
+								@components.Input(components.InputProps{
+									ID:    "first_name",
+									Label: "First Name",
+									Name:  "first_name",
+									Type:  "text",
+								})
+							</div>
+							<div class="sm:col-span-3">
+								@components.Input(components.InputProps{
+									ID:    "last_name",
+									Label: "Last Name",
+									Name:  "last_name",
+									Type:  "text",
+								})
+							</div>
+							<div class="sm:col-span-4">
+								@components.Input(components.InputProps{
+									ID:    "email",
+									Label: "Email",
+									Name:  "email",
+									Type:  "email",
+								})
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mt-6 flex items-center justify-end gap-x-6">
+					<button type="button" class="text-sm font-semibold leading-6 text-gray-900" @click="window.location.reload()">Cancel</button>
+					<button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+				</div>
+			</form>
+		</div>
+	}
+}
