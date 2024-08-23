@@ -16,7 +16,8 @@ templ UserEdit(props UserEditPageProps) {
 		<div class="w-full px-4 container mx-auto mt-8">
 			<h1 class="text-2xl font-bold mb-8">{ props.User.FullName() }</h1>
 			<form hx-patch="/users/update" hx-target="#flash-message">
-				<input type="hidden" name="" value={ props.Token }/>
+				<input type="hidden" name="_csrf" value={ props.Token }/>
+        <input type="hidden" name="id" value={ props.User.ID.String() } />
 				<div class="space-y-12">
 					<div class="border-b border-gray-900/10 pb-12">
 						<h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
@@ -27,6 +28,7 @@ templ UserEdit(props UserEditPageProps) {
 									Label: "First Name",
 									Name:  "first_name",
 									Type:  "text",
+                  Value: props.User.FirstName,
 								})
 							</div>
 							<div class="sm:col-span-3">
@@ -35,6 +37,7 @@ templ UserEdit(props UserEditPageProps) {
 									Label: "Last Name",
 									Name:  "last_name",
 									Type:  "text",
+                  Value: props.User.LastName,
 								})
 							</div>
 							<div class="sm:col-span-4">
@@ -43,6 +46,7 @@ templ UserEdit(props UserEditPageProps) {
 									Label: "Email",
 									Name:  "email",
 									Type:  "email",
+                  Value: props.User.Email,
 								})
 							</div>
 						</div>

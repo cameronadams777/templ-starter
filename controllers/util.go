@@ -1,13 +1,30 @@
 package controllers
 
 import (
+	"app/structs"
 	"context"
 	"math/rand"
-	"app/structs"
 
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
 )
+
+func get_app_context(c echo.Context) structs.AppContext {
+	user_id := c.Get("user_id")
+
+	if user_id == nil {
+		user_id = ""
+	}
+
+	app_context := structs.AppContext{
+		Key: "session",
+		Value: structs.SessionContext{
+			UserID: user_id.(string),
+		},
+	}
+
+  return app_context
+}
 
 func render(c echo.Context, component templ.Component) error {
 	return component.Render(c.Request().Context(), c.Response())

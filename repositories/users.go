@@ -3,6 +3,7 @@ package repositories
 import (
 	"app/models"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -15,10 +16,10 @@ type FindUserParams struct {
 	Email string
 }
 
-func (s *UserRepository) FindUser(params FindUserParams) (*models.User, error) {
+func (ur *UserRepository) FindUser(params FindUserParams) (*models.User, error) {
 	var user models.User
 
-  tx := s.DB
+  tx := ur.DB
 
   if params.ID != "" {
     tx = tx.Where("id = ?", params.ID)
@@ -37,12 +38,25 @@ func (s *UserRepository) FindUser(params FindUserParams) (*models.User, error) {
 	return &user, nil
 }
 
-func (s *UserRepository) CreateUser(user models.User) error {
-	err := s.DB.Create(&user).Error
+func (ur *UserRepository) CreateUser(user models.User) error {
+	err := ur.DB.Create(&user).Error
 
 	if err != nil {
 		return err
 	}
 
 	return nil
+}
+
+func (ur *UserRepository) Update(id uuid.UUID, updated_user models.User) (*models.User, error) {
+  var user_to_update models.User
+  err := ur.DB.First(&user_to_update, id).Error
+
+  if err != nil {
+    return nil, err
+  }
+
+  ur.DB.Model(&user_to_update).Updates(updated_user)
+
+  return &user_to_update, nil
 }

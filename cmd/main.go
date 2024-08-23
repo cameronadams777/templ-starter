@@ -57,6 +57,7 @@ func main() {
     DB: db,
   }
   users.GET("/edit", users_controller.HandleUsersEdit)
+  users.PATCH("/update", users_controller.HandleUsersUpdate)
 
 	app.Logger.Fatal(app.Start(":4000"))
 }
