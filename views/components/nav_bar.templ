@@ -13,7 +13,7 @@ templ nav_actions() {
   {{ session := views.GetSessionContext(ctx) }}
   if session.IsAuthenticated() {
     <div>
-      <a href="/sign-out" class="mr-2 hover:underline font-bold">Logout</a>
+      <a href="/logout" class="mr-2 hover:underline font-bold">Logout</a>
     </div>
   } else {
     <div>

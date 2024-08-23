@@ -7,9 +7,9 @@ type AppContext struct {
 
 type SessionContext struct {
 	CSRFToken string
-	UserID    uint
+	UserID    string
 }
 
 func (s SessionContext) IsAuthenticated() bool {
-  return s.UserID != 0
+	return s.UserID != ""
 }
