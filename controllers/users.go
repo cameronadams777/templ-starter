@@ -4,7 +4,7 @@ import (
 	"app/services"
 	"app/views/components"
 	"app/views/pages/user_pages"
-	"fmt"
+
 	"net/http"
 
 	"github.com/labstack/echo/v4"
